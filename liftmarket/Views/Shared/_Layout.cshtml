@@ -1,0 +1,97 @@
+﻿<style>
+    .navbar-inverse .navbar-nav li a {
+        color: eee !important;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: eee !important;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 35px;
+    }
+
+    ortakisim {
+        position: fixed;
+        margin-top: 50px;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #337ab7;">
+        <div class="container">
+            <div class="navbar-header" style="color:#eee;">
+                <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("LiftMarket", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <p class="navbar-brand">LiftMarket</p>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Session["Musteri"] != null && (Boolean)Session["Musteri"] == true)
+                    {
+                        <li>@Html.ActionLink("Anasayfa", "Index", "Home", new { area = "" }, null)</li>
+                        @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>*@
+                        <li>@Html.ActionLink("Hakkımızda", "Hakkimizda", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("İletişim", "Iletisim", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Ürünlerimiz", "Urunlerimiz", "Home", new { area = "" }, null)</li>
+                    }
+                    else if (Session["Yonetici"] != null && (Boolean)Session["Yonetici"] == true)
+                    {
+                        <li>@Html.ActionLink("Ürünler", "Index", "Yonetici", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Siparişler", "Siparisler", "Yonetici", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Ödeme Bilgileri", "Index", "Yonetici", new { area = "" }, null)</li>
+
+                    }
+                    else if (Session["Bayi"] != null && (Boolean)Session["Bayi"] == true)
+                    {
+                        <li>@Html.ActionLink("Ürünler", "Index", "Bayi", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Sepet", "Basket", "Bayi", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Siparisler", "Siparisler", "Bayi", new { area = "" }, null)</li>
+
+                    }
+
+                </ul>
+                @*@Html.ActionLink("Çıkış", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                @if (Session["Yonetici"] != null || Session["Bayi"] != null)
+                {
+                    <a href="@Url.Action("Index", "Home")" style="float:right; color:white; font-size:15px; margin-top:15px;">Çıkış</a>
+                }
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content" style="margin-top:50px!important">
+        @RenderBody()
+        <hr />
+        <footer class="footer">
+            <p style="text-align:center">&copy; @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

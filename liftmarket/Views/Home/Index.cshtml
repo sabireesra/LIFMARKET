@@ -1,0 +1,28 @@
+﻿<style>
+    .forLeft {
+        margin-left: 20px;
+    }
+    .forRight {
+        margin-right: 20px;
+    }
+</style>
+
+<div class="row">
+    <div class="main">
+        <h2 style="text-align:center; color:#337ab7">HOŞGELDİNİZ</h2>
+        <br />
+        <div class="fakeimg" style="height:300px;text-align:center">
+            <img src="~/img/logo.jpeg" alt="LİFTMARKET - Kamyon" height="300" style="text-align:center">
+        </div>
+        <p style="text-align:center">Önceliğimiz işiniz.</p>
+        <p style="text-align:center"> LİFTMARKET araç özellikleri ve artan yaşam beklentileri için, geniş bir ürün yelpazesiyle faaliyet göstermektedir. <p>
+            <hr />
+            <div style="text-align:center">
+                @{
+                    @Html.ActionLink("Yönetici Girişi", "YoneticiGiris", "Home", new { @class = "btn btn-primary forRight" })
+                    @Html.ActionLink("Bayi Girişi", "BayiGiris", "Home", new { @class = "btn btn-primary" })
+                    @*@Html.ActionLink("Müşteri Girişi", "MusteriGiris", "Home", new { @class = "btn btn-primary forLeft" })*@
+                }
+            </div>
+    </div>
+</div>
